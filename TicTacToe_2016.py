@@ -142,19 +142,11 @@ def iswinner(board, symbol_1, symbol_2):
             print(f"Player {symbol_2}, you won!")
 
     # Check the diagonals
-    if board[0][0] == board[1][1] == board[2][2] == symbol_1:
+    if (board[0][0] == board[1][1] == board[2][2] == symbol_1) or (board[0][2] == board[1][1] == board[2][0] == symbol_1):
         winner = False 
         print(f"Player {symbol_1}, you won!")
 
-    elif board[0][0] == board[1][1] == board[2][2] == symbol_2:
-        winner = False
-        print(f"Player {symbol_2}, you won!")
-
-    elif board[0][2] == board[1][1] == board[2][0] == symbol_1:
-        winner = False
-        print(f"Player {symbol_1}, you won!")
-
-    elif board[0][2] == board[1][1] == board[2][0] == symbol_2:
+    elif (board[0][0] == board[1][1] == board[2][2] == symbol_2) or (board[0][2] == board[1][1] == board[2][0] == symbol_2):
         winner = False
         print(f"Player {symbol_2}, you won!")
 
