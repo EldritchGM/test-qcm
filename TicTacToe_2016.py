@@ -83,7 +83,7 @@ def isfull(board, symbol_1, symbol_2):
 # This function check if the board is full
     while count < 10 and winner == True:
         startgamming(board, symbol_1, symbol_2, count)
-        printPretty(board)
+        printpretty(board)
         
         if count == 9:
             print("The board is full. Game over.")
@@ -107,7 +107,7 @@ def outofboard():
     
     
 
-def printPretty(board):
+def printpretty(board):
 # This function prints the board nice!
     rows = len(board)
     print("---+---+---")
@@ -172,7 +172,7 @@ def main():
 # The main function
     intro()
     board = create_grid()
-    printPretty(board)
+    printpretty(board)
     symbol_1, symbol_2 = sym()
     isfull(board, symbol_1, symbol_2) # The function that starts the game is also in here.
   
