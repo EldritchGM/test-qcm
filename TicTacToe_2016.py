@@ -56,13 +56,13 @@ def startgamming(board, symbol_1, symbol_2, count):
 
     # Check if players' selection is out of range
     while (row > 2 or row < 0) or (column > 2 or column < 0):
-        outofboard(row, column)
+        outofboard()
         row = int(input(row_ask))
         column = int(input())
 
         # Check if the square is already filled
     while (board[row][column] == symbol_1)or (board[row][column] == symbol_2):
-        illegal(board, symbol_1, symbol_2, row, column)
+        illegal()
         row = int(input(row_ask))
         column = int(input(column_ask))    
         
@@ -91,7 +91,7 @@ def isfull(board, symbol_1, symbol_2):
                 print("There is a tie. ")
 
         # Check if here is a winner
-        winner = iswinner(board, symbol_1, symbol_2, count)
+        winner = iswinner(board, symbol_1, symbol_2)
         count += 1
     if winner == False:
         print("Game over.")
