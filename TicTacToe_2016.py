@@ -39,36 +39,32 @@ def sym():
 
 
 
-def startGamming(board, symbol_1, symbol_2, count):
+def startgamming(board, symbol_1, symbol_2, count):
 # This function starts the game.
 
     # Decides the turn
+    row_ask = "Pick a row:\n[upper row: enter 0, middle row: enter 1, bottom row: enter 2]:"
+    column_ask = "Pick a column:\n[left column: enter 0, middle column: enter 1, right column enter 2]"
     if count % 2 == 0:
         player = symbol_1
     elif count % 2 == 1:
         player = symbol_2
-    print("Player "+ player + ", it is your turn. ")
-    row = int(input("Pick a row:"
-                    "[upper row: enter 0, middle row: enter 1, bottom row: enter 2]:"))
-    column = int(input("Pick a column:"
-                       "[left column: enter 0, middle column: enter 1, right column enter 2]"))
+    print(f"Player {player}, it is your turn. ")
+    row = int(input(row_ask))
+    column = int(input(column_ask))
 
 
     # Check if players' selection is out of range
     while (row > 2 or row < 0) or (column > 2 or column < 0):
-        outOfBoard(row, column)
-        row = int(input("Pick a row[upper row:"
-                        "[enter 0, middle row: enter 1, bottom row: enter 2]:"))
-        column = int(input("Pick a column:"
-                           "[left column: enter 0, middle column: enter 1, right column enter 2]"))
+        outofboard(row, column)
+        row = int(input(row_ask))
+        column = int(input())
 
         # Check if the square is already filled
     while (board[row][column] == symbol_1)or (board[row][column] == symbol_2):
-        filled = illegal(board, symbol_1, symbol_2, row, column)
-        row = int(input("Pick a row[upper row:"
-                        "[enter 0, middle row: enter 1, bottom row: enter 2]:"))
-        column = int(input("Pick a column:"
-                            "[left column: enter 0, middle column: enter 1, right column enter 2]"))    
+        illegal(board, symbol_1, symbol_2, row, column)
+        row = int(input(row_ask))
+        column = int(input(column_ask))    
         
     # Locates player's symbol on the board
     if player == symbol_1:
@@ -81,13 +77,13 @@ def startGamming(board, symbol_1, symbol_2, count):
 
 
 
-def isFull(board, symbol_1, symbol_2):
+def isfull(board, symbol_1, symbol_2):
     count = 1
     winner = True
 # This function check if the board is full
     while count < 10 and winner == True:
-        gaming = startGamming(board, symbol_1, symbol_2, count)
-        pretty = printPretty(board)
+        startgamming(board, symbol_1, symbol_2, count)
+        printPretty(board)
         
         if count == 9:
             print("The board is full. Game over.")
@@ -95,7 +91,7 @@ def isFull(board, symbol_1, symbol_2):
                 print("There is a tie. ")
 
         # Check if here is a winner
-        winner = isWinner(board, symbol_1, symbol_2, count)
+        winner = iswinner(board, symbol_1, symbol_2, count)
         count += 1
     if winner == False:
         print("Game over.")
@@ -105,7 +101,7 @@ def isFull(board, symbol_1, symbol_2):
 
 
 
-def outOfBoard(row, column):
+def outofboard():
 # This function tells the players that their selection is out of range
     print("Out of boarder. Pick another one. ")
     
@@ -114,7 +110,6 @@ def outOfBoard(row, column):
 def printPretty(board):
 # This function prints the board nice!
     rows = len(board)
-    cols = len(board)
     print("---+---+---")
     for r in range(rows):
         print(board[r][0], " |", board[r][1], "|", board[r][2])
@@ -123,51 +118,51 @@ def printPretty(board):
 
 
 
-def isWinner(board, symbol_1, symbol_2, count):
+def iswinner(board, symbol_1, symbol_2):
 # This function checks if any winner is winning
     winner = True
     # Check the rows
     for row in range (0, 3):
         if (board[row][0] == board[row][1] == board[row][2] == symbol_1):
             winner = False
-            print("Player " + symbol_1 + ", you won!")
+            print(f"Player {symbol_1}, you won!")
    
         elif (board[row][0] == board[row][1] == board[row][2] == symbol_2):
             winner = False
-            print("Player " + symbol_2 + ", you won!")
+            print(f"Player {symbol_2}, you won!")
             
             
     # Check the columns
     for col in range (0, 3):
         if (board[0][col] == board[1][col] == board[2][col] == symbol_1):
             winner = False
-            print("Player " + symbol_1 + ", you won!")
+            print(f"Player {symbol_1}, you won!")
         elif (board[0][col] == board[1][col] == board[2][col] == symbol_2):
             winner = False
-            print("Player " + symbol_2 + ", you won!")
+            print(f"Player {symbol_2}, you won!")
 
     # Check the diagonals
     if board[0][0] == board[1][1] == board[2][2] == symbol_1:
         winner = False 
-        print("Player " + symbol_1 + ", you won!")
+        print(f"Player {symbol_1}, you won!")
 
     elif board[0][0] == board[1][1] == board[2][2] == symbol_2:
         winner = False
-        print("Player " + symbol_2 + ", you won!")
+        print(f"Player {symbol_2}, you won!")
 
     elif board[0][2] == board[1][1] == board[2][0] == symbol_1:
         winner = False
-        print("Player " + symbol_1 + ", you won!")
+        print(f"Player {symbol_1}, you won!")
 
     elif board[0][2] == board[1][1] == board[2][0] == symbol_2:
         winner = False
-        print("Player " + symbol_2 + ", you won!")
+        print(f"Player {symbol_2}, you won!")
 
     return winner
     
 
 
-def illegal(board, symbol_1, symbol_2, row, column):
+def illegal():
     print("The square you picked is already filled. Pick another one.")
 
     
@@ -183,11 +178,11 @@ def report(count, winner, symbol_1, symbol_2):
 
 def main():
 # The main function
-    introduction = intro()
+    intro()
     board = create_grid()
-    pretty = printPretty(board)
+    printPretty(board)
     symbol_1, symbol_2 = sym()
-    full = isFull(board, symbol_1, symbol_2) # The function that starts the game is also in here.
+    isfull(board, symbol_1, symbol_2) # The function that starts the game is also in here.
   
 
 
